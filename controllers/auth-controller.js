@@ -4,7 +4,6 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
-const config = require('../config')
 
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -24,7 +23,7 @@ const createSendToken = (user, statusCode, res) => {
 
   res.cookie('jwt', token, cookieOptions);
 
-  // Remove password from output
+  
   user.password = undefined;
 
   res.status(statusCode).json({
@@ -44,7 +43,7 @@ exports.signUp = catchAsync(async (req, res) => {
     passwordConfirm: req.body.passwordConfirm,
   });
 
-  //JWT SignIn function
+  
   createSendToken(newUser, 201, res);
 });
 

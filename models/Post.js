@@ -18,12 +18,16 @@ const postSchema = new mongoose.Schema(
       type: Date,
       default: Date.now(),
     },
+    isActive: {
+      type: Boolean,
+      default: true,
+    },
   }
-  //   {
-  //     //Each time the data is outputted as JSON/Object then virtuals will be true
-  //     toJSON: { virtuals: true },
-  //     toObject: { virtuals: true },
-  //   }
+  
+  
+  
+  
+  
 );
 
 const Post = mongoose.model("Post", postSchema);

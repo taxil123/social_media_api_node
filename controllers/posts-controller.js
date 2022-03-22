@@ -98,85 +98,12 @@ exports.updatePost = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.likePost = catchAsync(async (req, res, next) => {
-  const post = await Post.findById(req.params.id);
+exports.activatePost = catchAsync(async (req, res, next) => {
+  
+  await Post.findByIdAndUpdate(req.user.id, req.body);
 
-  //If post has already been liked
-  if (post.likes.some((el) => el.user.toString() === req.user.id)) {
-    return next();
-  }
-
-  post.likes.unshift({ user: req.user.id });
-
-  await post.save();
-
-  res.status(200).json({
+  res.status(204).json({
     status: "success",
-    data: {
-      likes: post.likes,
-    },
-  });
-});
-
-exports.unlikePost = catchAsync(async (req, res, next) => {
-  const post = await Post.findById(req.params.id);
-
-  //If post has not been liked
-  if (!post.likes.some((el) => el.user.toString() === req.user.id)) {
-    return next();
-  }
-
-  post.likes.filter(({ user }) => user.toString !== req.user.id);
-
-  await post.save();
-
-  res.status(200).json({
-    status: "success",
-    data: {
-      likes: post.likes,
-    },
-  });
-});
-
-exports.commentOnPost = catchAsync(async (req, res, next) => {
-  const post = await Post.findById(req.params.id);
-  const user = await User.findById(req.user.id);
-
-  const userComment = {
-    user,
-    comment: req.body.comment,
-  };
-
-  post.comments.unshift(userComment);
-
-  res.status(200).json({
-    status: "success",
-    data: {
-      comments: post.comments,
-    },
-  });
-});
-
-exports.deleteCommentOnPost = catchAsync(async (req, res, next) => {
-  const post = await Post.findById(req.params.id);
-
-  const userComment = post.comments.find(
-    (comment) => comment.id === req.params.comment_id
-  );
-
-  //Checking for comment's existence
-  if (!userComment) {
-    return next(new AppError("Comment does not exists", 404));
-  }
-
-  post.comments.filter(({ id }) => id !== userComment);
-
-  await post.save();
-
-  res.status(200).json({
-    status: "success",
-    data: {
-      comments: post.comments,
-    },
+    data: null,
   });
 });

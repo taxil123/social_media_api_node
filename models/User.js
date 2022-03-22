@@ -46,19 +46,19 @@ const userSchema = new mongoose.Schema(
       },
     ],
   }
-  // {
-  //   //Each time the data is outputted as JSON/Object then virtuals will be true
-  //   toJSON: { virtuals: true },
-  //   toObject: { virtuals: true },
-  // }
+  
+  
+  
+  
+  
 );
 
-// // Virtually populating User Profile
-// userSchema.virtual('profile', {
-//   ref: 'Profile',
-//   foreignField: 'user',
-//   localField: '_id',
-// });
+
+
+
+
+
+
 
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
@@ -107,7 +107,7 @@ userSchema.methods.createPasswordResetToken = function () {
     .update(resetToken)
     .digest("hex");
 
-  //10 is minutes, 60 is seconds, and 1000 is for milliseconds
+  
   this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
 };
 

@@ -5,7 +5,7 @@ const Friends = require("../models/Friends");
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
 
-// 1- Friend request
+
 exports.sendFriendRequest = catchAsync(async (req, res, next) => {
   const userA = await User.findById(req.user.id);
   const recipientUser = req.body.recipient;
@@ -61,7 +61,7 @@ exports.sendFriendRequest = catchAsync(async (req, res, next) => {
   });
 });
 
-// 2- Accept Friend request
+
 exports.acceptFriendRequest = catchAsync(async (req, res, next) => {
   const userA = await User.findById(req.user.id);
   const recipientUser = req.body.recipient;
@@ -85,7 +85,7 @@ exports.acceptFriendRequest = catchAsync(async (req, res, next) => {
   });
 });
 
-// 3- Reject friend request
+
 exports.rejectFriendRequest = catchAsync(async (req, res, next) => {
   const userA = await User.findById(req.user.id);
   const recipientUser = req.body.recipient;
@@ -124,7 +124,7 @@ exports.rejectFriendRequest = catchAsync(async (req, res, next) => {
   });
 });
 
-// 4- check whether recipient is friend of requester
+
 exports.checkFriends = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.user.id);
   const recipientUser = await User.findById(req.body.recipient);
@@ -163,7 +163,7 @@ exports.checkFriends = catchAsync(async (req, res, next) => {
   next();
 });
 
-// 5- get all friends
+
 exports.getAllFriends = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.user.id);
 
@@ -181,7 +181,7 @@ exports.getAllFriends = catchAsync(async (req, res, next) => {
   });
 });
 
-// 6- Get one friend
+
 exports.getFriend = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.user.id);
   const friend = await User.findById(req.query.id);

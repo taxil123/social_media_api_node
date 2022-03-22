@@ -21,7 +21,7 @@ const userProfileSchema = new mongoose.Schema(
     ],
   },
   {
-    //Each time the data is outputted as JSON/Object then virtuals will be true
+    
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
   }

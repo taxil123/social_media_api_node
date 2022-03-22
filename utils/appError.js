@@ -1,4 +1,4 @@
-//Used as a utility function for global Error handling middleware
+
 class AppError extends Error {
   constructor(message, statusCode) {
     super(message);

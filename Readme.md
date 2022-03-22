@@ -1,46 +1,132 @@
-Post json format->
+Endpoint -> /api/v1/users
 
-{
-        "title": "test",
-        "body": "test",
-        "active": true,
-        "location": {
-            "type": "Point",
-            "coordinates": [
-                -122.4194,
-                37.7749
-            ]
-        }
-}
+1. Sign up:
+    Endpoint -> /api/v1/users/signup
+    Method -> POST
+    Body -> {
+        "name": "username",
+        "email": "test@gmail.com"
+        "password": "password",
+        "passwordConfirm": "password",
+    }
+    response -> {
+        "token": "token"
+    }
 
-User login register format :
-{
-    "name": "test",
-    "username": "test",
-    "password": "test"
-}
+2. Sign in:
+    Endpoint -> /api/v1/users/login
+    Method -> POST
+    Body -> {
+        "email": "username@gmail.com",
+        "password": "password",
+    }
+    response -> {
+        "token": "token"
+    }
+    
+3. Get Profile:
+    Endpoint -> /api/v1/users/:id/getProfile
+    Method -> GET
+    Header -> {
+        "Authorization": "Bearer token"
+    }
 
+4.Get Posts:
+    Endpoint -> /api/v1/users/:id/posts/community
+    Method -> GET
+    Header -> {
+        "Authorization": "Bearer token"
+    }
 
-User registration -> api: localhost:3001/register
-User login -> api: localhost:3001/login
+5.Create Posts:
+    Endpoint -> /api/v1/users/:id/posts/createPost  
+    Method -> POST
+    body -> {
+        "post": "post",
+        "image": "image",
+    }
+    Header -> {
+        "Authorization": "Bearer token"
+    }
 
+6.Delete Posts:
+    Endpoint -> /api/v1/users/:id/posts/:id  
+    Method -> DELETE
+    Header -> {
+        "Authorization": "Bearer token"
+    }
 
+7.Update Posts:
+    Endpoint -> /api/v1/users/:id/posts/:id  
+    Method -> PATCH
+    body -> {
+        "post": "post",
+        "image": "image",
+    }
+    Header -> {
+        "Authorization": "Bearer token"
+    }
 
-Task 3: Create the CRUD of Post for the only authenticated user.
-localhost:3001/posts/create
-localhost:3001/posts/:id - put
-localhost:3001/posts/:id - get
-localhost:3001/posts/:id - delete
+8.Get All Friends:
+    Endpoint -> /api/v1/users/:id/friends
+    Method -> GET
+    Header -> {
+        "Authorization": "Bearer token"
+    }
 
+9.Get Friend:
+    Endpoint -> /api/v1/users/:id/friends/getFriend
+    Method -> GET
+    Header -> {
+        "Authorization": "Bearer token"
+    }
 
-Task 4:
-- Create an API to retrieve posts using latitude and longitude.
-localhost:3001/posts/location_coords
+10.Send Friend Request:
+    Endpoint -> /api/v1/users/:id/friends/sendFriendRequest
+    body -> {
+        "recipient": "friendId"
+    }
+    Method -> POST
+    Header -> {
+        "Authorization": "Bearer token"
+    }
 
-Task 5:
-- Show the count of active and inactive post in the dashboard.
-localhost:3001/showCount
+11.Accept Friend Request:
+    Endpoint -> /api/v1/users/:id/friends/acceptFriendRequest
+    body -> {
+        "recipient": "friendId"
+    }
+    Method -> POST
+    Header -> {
+        "Authorization": "Bearer token"
+    }
 
+12.Reject Friend Request:
+    Endpoint -> /api/v1/users/:id/friends/rejectFriendRequest
+    body -> {
+        "recipient": "friendId"
+    }
+    Method -> POST
+    Header -> {
+        "Authorization": "Bearer token"
+    }
 
-- for starting server install -> npm install
-- for starting server run -> npm start
+13.Activate posts to show friends:
+    Endpoint -> /api/v1/users/:id/posts/activatePost
+    Method -> POST
+    Body -> {
+        "isActive": "true"
+    }
+    Header -> {
+        "Authorization": "Bearer token"
+    }
+
+14.Activate posts to public:
+    Endpoint -> /api/v1/users/:id/posts/activatePost
+    Method -> POST
+    Body -> {
+        "isActive": "false"
+    }
+    Header -> {
+        "Authorization": "Bearer token"
+    }
